@@ -45,19 +45,21 @@ Requires: python%{python3_pkgversion}-jq
 Requires: python%{python3_pkgversion}-websockets
 Requires: python%{python3_pkgversion}-websocket-client >= 0.57.0
 
+Provides: awxkit = %{version}-%{release}
+Provides: awx-cli = %{version}-%{release}
+Provides: akit = %{version}-%{release}
+
 %description -n     python%{python3_pkgversion}-%{pypi_name}
 
 %prep
 %setup -c %{pypi_name}-%{pypi_version}
 
 %build
-cp %{SOURCE1} awx
-cp %{SOURCE2} akit
-
 %install
 install -d %{buildroot}%{_bindir}
-install awx %{buildroot}%{_bindir}/awx
-install akit %{buildroot}%{_bindir}/akit
+install %{SOURCE1} %{buildroot}%{_bindir}/awx
+install %{SOURCE2} %{buildroot}%{_bindir}/akit
+
 rm -f awx
 rm -f akit
 
