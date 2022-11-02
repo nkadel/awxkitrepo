@@ -11,6 +11,9 @@
 %global srcname websockets
 %global pypi_version 10.1
 
+# Avoid errors about missing debugsourcfiles.list
+%define debug_package %{nil}
+
 Name:           python-%{pypi_name}
 Version:        %{pypi_version}
 Release:        0.1%{?dist}

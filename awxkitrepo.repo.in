@@ -1,0 +1,13 @@
+[awxkitrepo]
+name=Ansible local repo - $basearch
+baseurl=file://@REPOBASEDIR@/awxkitrepo/@RELEASEDIR@/$releasever/$basearch
+enabled=0
+gpgcheck=0
+metadata_expire=1
+
+[awxkitrepo-source]
+name=Ansible local repo - Source
+baseurl=file://@REPOBASEDIR@/awxkitrepo/@RELEASEDIR@/$releasever/SRPMS/
+enabled=0
+gpgcheck=0
+metadata_expire=1

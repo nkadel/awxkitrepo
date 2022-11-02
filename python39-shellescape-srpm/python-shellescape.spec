@@ -1,3 +1,11 @@
+# Force python38 for RHEL 8, which has python 3.6 by default
+%if 0%{?el8}
+%global python3_version 3.9
+%global python3_pkgversion 39
+# For RHEL 'platform python' insanity: Simply put, no.
+%global __python3 %{_bindir}/python%{python3_version}
+%endif
+
 # Created by pyp2rpm-3.3.8
 %global pypi_name shellescape
 %global srcname shellescape

@@ -24,8 +24,8 @@ the low level APIs for WebSocket. All APIs are the synchronous functions.
 python-websocket-client supports only hybi-13.}
 
 Name:               python-%{pkgname}
-Version:            0.56.0
-Release:            0.5%{?dist}
+Version:            0.57.0
+Release:            0.1%{?dist}
 Summary:            WebSocket client for python
 License:            BSD
 URL:                https://github.com/websocket-client/websocket-client
