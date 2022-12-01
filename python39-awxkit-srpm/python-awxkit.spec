@@ -8,7 +8,7 @@
 
 %global pypi_name awxkit
 %global srcname awxkit
-%global pypi_version 21.8.0
+%global pypi_version 21.9.0
 
 Name: python-%{pypi_name}
 Version: %{pypi_version}
@@ -17,7 +17,7 @@ Summary: awxkit
 License: Apache
 
 # whl files cannot use pypi_source
-Source0: https://files.pythonhosted.org/packages/b1/e0/347277ec924c7bc3f6a2d6188c78a2a653838bfc4d4de9059cddc0d8c012/awxkit-%{version}-py3-none-any.whl
+Source0: https://files.pythonhosted.org/packages/c6/6d/0775fc8c3ed209151a083f10e12e4dd584d12ab0857a0bd3bab3b4bc83f8/awxkit-%{pypi_version}-py3-none-any.whl
 
 # Scripts normally built by wheel installer
 # python version set by RPM python processing
@@ -45,9 +45,9 @@ Requires: python%{python3_pkgversion}-jq
 Requires: python%{python3_pkgversion}-websockets
 Requires: python%{python3_pkgversion}-websocket-client >= 0.57.0
 
-Provides: awxkit = %{version}-%{release}
-Provides: awx-cli = %{version}-%{release}
-Provides: akit = %{version}-%{release}
+Provides: awxkit = %{pypi_version}-%{release}
+Provides: awx-cli = %{pypi_version}-%{release}
+Provides: akit = %{pypi_version}-%{release}
 
 %description -n     python%{python3_pkgversion}-%{pypi_name}
 
@@ -68,7 +68,7 @@ cp -r * %{buildroot}%{python3_sitelib}/
 
 %files -n python%{python3_pkgversion}-%{pypi_name}
 %{python3_sitelib}/%{pypi_name}
-%{python3_sitelib}/%{pypi_name}-%{version}.dist-info
+%{python3_sitelib}/%{pypi_name}-%{pypi_version}.dist-info
 %{_bindir}/awx
 %{_bindir}/akit
 
