@@ -9,7 +9,7 @@
 # Created by pyp2rpm-3.3.8
 %global pypi_name websockets
 %global srcname websockets
-%global pypi_version 10.1
+%global pypi_version 10.4
 
 # Avoid errors about missing debugsourcfiles.list
 %define debug_package %{nil}
@@ -62,7 +62,9 @@ rm -rf html/.{doctrees,buildinfo}
 #%%{__python3} setup.py test
 
 %files -n python%{python3_pkgversion}-%{pypi_name}
-%doc README.rst compliance/README.rst
+%doc README.rst
+# Overwritten by doc directory flattening
+#%%dov compliance/README.rst
 %{python3_sitearch}/%{pypi_name}
 #%%{python3_sitearch}/%{pypi_name}/extensions
 #%%{python3_sitearch}/%{pypi_name}/legacy
@@ -70,7 +72,7 @@ rm -rf html/.{doctrees,buildinfo}
 
 %files -n python-%{pypi_name}-doc
 #%doc html
-%license LICENSE docs/project/license.rst
+%license LICENSE
 
 %changelog
 * Wed Nov 02 2022 Nico Kadel-Garcia <nkadel@gmail.com> - 10.1-1
