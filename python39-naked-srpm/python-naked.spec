@@ -9,7 +9,7 @@
 # Created by pyp2rpm-3.3.8
 %global pypi_name naked
 %global srcname Naked
-%global pypi_version 0.1.31
+%global pypi_version 0.1.32
 
 Name:           python-%{pypi_name}
 Version:        %{pypi_version}
