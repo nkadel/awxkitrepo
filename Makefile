@@ -11,21 +11,22 @@ ANSIBLEPKGS+=python39-crypto-srpm
 ANSIBLEPKGS+=python39-jq-srpm
 ANSIBLEPKGS+=python39-naked-srpm
 ANSIBLEPKGS+=python39-shellescape-srpm
-ANSIBLEPKGS+=python39-websocket-client-srpm
+
 ANSIBLEPKGS+=python39-websockets-srpm
+ANSIBLEPKGS+=python39-websocket-client-srpm
 
 ANSIBLEPKGS+=python39-awxkit-srpm
 
 REPOS+=awxkitrepo/el/8
 REPOS+=awxkitrepo/el/9
-REPOS+=awxkitrepo/fedora/36
+REPOS+=awxkitrepo/fedora/37
 REPOS+=awxkitrepo/amz/2
 
 REPODIRS := $(patsubst %,%/x86_64/repodata,$(REPOS)) $(patsubst %,%/SRPMS/repodata,$(REPOS))
 
 CFGS+=awxkitrepo-8-x86_64.cfg
 CFGS+=awxkitrepo-9-x86_64.cfg
-CFGS+=awxkitrepo-f36-x86_64.cfg
+CFGS+=awxkitrepo-f37-x86_64.cfg
 # Amazon 2 config
 #CFGS+=awxkitrepo-amz2-x86_64.cfg
 
@@ -34,7 +35,7 @@ CFGS+=centos-stream+epel-8-x86_64.cfg
 
 # Link from /etc/mock
 MOCKCFGS+=centos-stream+epel-9-x86_64.cfg
-MOCKCFGS+=fedora-36-x86_64.cfg
+MOCKCFGS+=fedora-37-x86_64.cfg
 #MOCKCFGS+=amazonlinux-2-x86_64.cfg
 
 all:: install
@@ -127,7 +128,7 @@ awxkitrepo-8-x86_64.cfg: /etc/mock/centos-stream+epel-8-x86_64.cfg
 	@echo 'skip_if_unavailable=False' | tee -a $@
 	@echo 'metadata_expire=1s' | tee -a $@
 	@echo 'gpgcheck=0' | tee -a $@
-	@echo '' | tee -a $@
+	@echo '"""' | tee -a $@
 
 # packages-microsoft-com-prod added for /bin/pwsh
 awxkitrepo-9-x86_64.cfg: centos-stream+epel-9-x86_64.cfg
@@ -142,9 +143,9 @@ awxkitrepo-9-x86_64.cfg: centos-stream+epel-9-x86_64.cfg
 	@echo 'skip_if_unavailable=False' | tee -a $@
 	@echo 'metadata_expire=1s' | tee -a $@
 	@echo 'gpgcheck=0' | tee -a $@
-	@echo '' | tee -a $@
+	@echo '"""' | tee -a $@
 
-awxkitrepo-f36-x86_64.cfg: /etc/mock/fedora-36-x86_64.cfg
+awxkitrepo-f37-x86_64.cfg: /etc/mock/fedora-37-x86_64.cfg
 	@echo Generating $@ from $?
 	@echo "include('$?')" | tee $@
 	@echo "config_opts['root'] = 'awxkitrepo-f{{ releasever }}-{{ target_arch }}'" | tee -a $@
@@ -152,7 +153,7 @@ awxkitrepo-f36-x86_64.cfg: /etc/mock/fedora-36-x86_64.cfg
 	@echo '[awxkitrepo]' | tee -a $@
 	@echo 'name=awxkitrepo' | tee -a $@
 	@echo 'enabled=1' | tee -a $@
-	@echo 'baseurl=$(REPOBASE)/awxkitrepo/fedora/36/x86_64/' | tee -a $@
+	@echo 'baseurl=$(REPOBASE)/awxkitrepo/fedora/37/x86_64/' | tee -a $@
 	@echo 'skip_if_unavailable=False' | tee -a $@
 	@echo 'metadata_expire=1s' | tee -a $@
 	@echo 'gpgcheck=0' | tee -a $@
