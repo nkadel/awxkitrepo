@@ -7,15 +7,15 @@ REPOBASE=file://$(PWD)
 
 
 # EPEL built
-ANSIBLEPKGS+=python39-crypto-srpm
-ANSIBLEPKGS+=python39-jq-srpm
-ANSIBLEPKGS+=python39-naked-srpm
-ANSIBLEPKGS+=python39-shellescape-srpm
+ANSIBLEPKGS+=python-crypto-srpm
+ANSIBLEPKGS+=python-jq-srpm
+ANSIBLEPKGS+=python-naked-srpm
+ANSIBLEPKGS+=python-shellescape-srpm
 
-ANSIBLEPKGS+=python39-websockets-srpm
-ANSIBLEPKGS+=python39-websocket-client-srpm
+ANSIBLEPKGS+=python-websockets-srpm
+ANSIBLEPKGS+=python-websocket-client-srpm
 
-ANSIBLEPKGS+=python39-awxkit-srpm
+ANSIBLEPKGS+=python-awxkit-srpm
 
 REPOS+=awxkitrepo/el/8
 REPOS+=awxkitrepo/el/9
@@ -30,7 +30,7 @@ CFGS+=awxkitrepo-f37-x86_64.cfg
 # Amazon 2 config
 #CFGS+=awxkitrepo-amz2-x86_64.cfg
 
-# /etc/mock version lacks python39 modules
+# /etc/mock version lacks python modules
 CFGS+=centos-stream+epel-8-x86_64.cfg
 
 # Link from /etc/mock
@@ -60,17 +60,17 @@ install clean getsrc build srpm src.rpm::
 
 # Dependencies of libraries on other libraries for compilation
 
-#python39-commentjson-srpm:: python39-lark-parser-srpm
-#python39-entrypoints-srpm:: python39-commentjson-srpm
+#python-commentjson-srpm:: python-lark-parser-srpm
+#python-entrypoints-srpm:: python-commentjson-srpm
 #
-#python39-flake8-srpm:: pyflakes-srpm
+#python-flake8-srpm:: pyflakes-srpm
 #
-#python39-resolvelib-srpm:: python39-flake8-srpm
-#python39-resolvelib-srpm:: python39-commentjson-srpm
+#python-resolvelib-srpm:: python-flake8-srpm
+#python-resolvelib-srpm:: python-commentjson-srpm
 #
-#awxkit-core-2.11.x-srpm:: python39-resolvelib-srpm
-##awxkit-core-2.12.x-srpm:: python39-resolvelib-srpm
-#awxkit-core-2.13.x-srpm:: python39-resolvelib-srpm
+#awxkit-core-2.11.x-srpm:: python-resolvelib-srpm
+##awxkit-core-2.12.x-srpm:: python-resolvelib-srpm
+#awxkit-core-2.13.x-srpm:: python-resolvelib-srpm
 #
 #awxkit-4.x-srpm:: awxkit-core-2.11.x-srpm
 ##awxkit-5.x-srpm:: awxkit-core-2.12.x-srpm
