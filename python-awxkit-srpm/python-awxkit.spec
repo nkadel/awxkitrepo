@@ -8,7 +8,7 @@
 
 %global pypi_name awxkit
 %global srcname awxkit
-%global pypi_version 21.11.0
+%global pypi_version 21.13.0
 
 Name: python-%{pypi_name}
 Version: %{pypi_version}
@@ -17,7 +17,7 @@ Summary: awxkit
 License: Apache
 
 # whl files cannot use pypi_source
-Source0: https://files.pythonhosted.org/packages/de/4a/874643ad6e3a74675e22731fc0f5e52f4b30513d1932b2c8b690ed2a9995/awxkit-21.11.0-py3-none-any.whl
+Source: https://files.pythonhosted.org/packages/f5/cf/8c8ee7d9beb858eb2761576a59b681e6231af93217beb0ee88a587f645ba/awxkit-21.13.0-py3-none-any.whl
 
 # Scripts normally built by wheel installer
 # python version set by RPM python processing
