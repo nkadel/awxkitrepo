@@ -7,12 +7,14 @@ REPOBASE=file://$(PWD)
 
 
 # EPEL built
-ANSIBLEPKGS+=python-crypto-srpm
+#ANSIBLEPKGS+=python-crypto-srpm
 ANSIBLEPKGS+=python-jq-srpm
-ANSIBLEPKGS+=python-naked-srpm
-ANSIBLEPKGS+=python-shellescape-srpm
-
+#ANSIBLEPKGS+=python-naked-srpm
+#ANSIBLEPKGS+=python-shellescape-srpm
+#
 ANSIBLEPKGS+=python-websockets-srpm
+
+# Requires websocket, conflicts with docker
 ANSIBLEPKGS+=python-websocket-client-srpm
 
 ANSIBLEPKGS+=python-awxkit-srpm

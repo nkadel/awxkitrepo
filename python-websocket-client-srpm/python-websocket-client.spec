@@ -1,7 +1,7 @@
 # Force python38 for RHEL 8, which has python 3.6 by default
-%if 0%{?el8}
-%global python3_version 3.9
-%global python3_pkgversion 39
+%if 0%{?el8} || 0%{?el9}
+%global python3_version 3.11
+%global python3_pkgversion 3.11
 # For RHEL 'platform python' insanity: Simply put, no.
 %global __python3 %{_bindir}/python%{python3_version}
 %endif
@@ -23,7 +23,7 @@ python-websocket-client supports only hybi-13.}
 
 Name:               python-%{pypi_name}
 Version:            1.4.2
-Release:            0.1%{?dist}
+Release:            0.2%{?dist}
 Summary:            WebSocket client for python
 License:            BSD
 URL:                https://github.com/websocket-client/websocket-client
@@ -41,6 +41,7 @@ BuildRequires:      python%{python3_pkgversion}-devel
 BuildRequires:      python%{python3_pkgversion}-setuptools
 BuildRequires:      python%{python3_pkgversion}-six
 BuildRequires:      python%{python3_pkgversion}-websockets
+BuildRequires:      python%{python3_pkgversion}-rpm-macros
 Requires:           python%{python3_pkgversion}-six
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{pypi_name}}
 
@@ -48,6 +49,9 @@ Requires:           python%{python3_pkgversion}-six
 # wsdump moved from py2 to py3 package
 Conflicts:          python2-websocket-client <= 0.40.0-4
 
+%if 0%{?el8} || 0%{?el9}
+Conflicts:          python3-websocket-client
+%endif
 
 %description -n python%{python3_pkgversion}-%{pypi_name} %{common_description}
 %endif # with python3

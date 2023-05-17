@@ -1,7 +1,7 @@
 # Force python38 for RHEL 8, which has python 3.6 by default
-%if 0%{?el8}
-%global python3_version 3.9
-%global python3_pkgversion 39
+%if 0%{?el8} || 0%{?el9}
+%global python3_version 3.11
+%global python3_pkgversion 3.11
 # For RHEL 'platform python' insanity: Simply put, no.
 %global __python3 %{_bindir}/python%{python3_version}
 %endif
@@ -12,7 +12,7 @@
 
 Name:           python-%{pypi_name}
 Version:        %{pypi_version}
-Release:        0.1%{?dist}
+Release:        0.2%{?dist}
 Summary:        jq is a lightweight and flexible JSON processor
 
 License:        BSD 2-Clause
@@ -21,6 +21,7 @@ Source0:        https://files.pythonhosted.org/packages/source/j/%{pypi_name}/%{
 
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
+BuildRequires:  python%{python3_pkgversion}-rpm-macros
 
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
