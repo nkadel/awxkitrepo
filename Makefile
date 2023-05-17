@@ -1,5 +1,5 @@
 #
-# Makefile - build wrapper for Ansible RPMs
+# Makefile - build wrapper for awx srpms
 #
 
 #REOBASEE=http://localhost
@@ -7,17 +7,17 @@ REPOBASE=file://$(PWD)
 
 
 # EPEL built
-#ANSIBLEPKGS+=python-crypto-srpm
-ANSIBLEPKGS+=python-jq-srpm
-#ANSIBLEPKGS+=python-naked-srpm
-#ANSIBLEPKGS+=python-shellescape-srpm
+#AWXKITPKGS+=python-crypto-srpm
+AWXKITPKGS+=python-jq-srpm
+#AWXKITPKGS+=python-naked-srpm
+#AWXKITPKGS+=python-shellescape-srpm
 #
-ANSIBLEPKGS+=python-websockets-srpm
+AWXKITPKGS+=python-websockets-srpm
 
 # Requires websocket, conflicts with docker
-ANSIBLEPKGS+=python-websocket-client-srpm
+AWXKITPKGS+=python-websocket-client-srpm
 
-ANSIBLEPKGS+=python-awxkit-srpm
+AWXKITPKGS+=python-awxkit-srpm
 
 REPOS+=awxkitrepo/el/8
 REPOS+=awxkitrepo/el/9
@@ -45,12 +45,12 @@ all:: install
 install:: $(CFGS)
 install:: $(MOCKCFGS)
 install:: $(REPODIRS)
-install:: $(ANSIBLEPKGS)
+install:: $(AWXKITPKGS)
 
 # Actually put all the modules in the local repo
 .PHONY: install clean getsrc build srpm src.rpm
 install clean getsrc build srpm src.rpm::
-	@for name in $(ANSIBLEPKGS); do \
+	@for name in $(AWXKITPKGS); do \
 	     (cd $$name && $(MAKE) $(MFLAGS) $@); \
 	done  
 
@@ -79,8 +79,8 @@ install clean getsrc build srpm src.rpm::
 #awxkit-6.x-srpm:: awxkit-core-2.13.x-srpm
 
 # Actually build in directories
-.PHONY: $(ANSIBLEPKGS)
-$(ANSIBLEPKGS)::
+.PHONY: $(AWXKITPKGS)
+$(AWXKITPKGS)::
 	(cd $@ && $(MAKE) $(MLAGS) install)
 
 repodirs: $(REPOS) $(REPODIRS)
@@ -212,19 +212,19 @@ clean::
 	find . -name \*~ -exec rm -f {} \;
 	rm -f *.cfg
 	rm -f *.out
-	@for name in $(ANSIBLEPKGS); do \
+	@for name in $(AWXKITPKGS); do \
 	    $(MAKE) -C $$name clean; \
 	done
 
 distclean: clean
 	rm -rf $(REPOS)
 	rm -rf awxkitrepo
-	@for name in $(ANSIBLEPKGS); do \
+	@for name in $(AWXKITPKGS); do \
 	    (cd $$name; git clean -x -d -f); \
 	done
 
 maintainer-clean: distclean
-	rm -rf $(ANSIBLEPKGS)
-	@for name in $(ANSIBLEPKGS); do \
+	rm -rf $(AWXKITPKGS)
+	@for name in $(AWXKITPKGS); do \
 	    (cd $$name; git clean -x -d -f); \
 	done
