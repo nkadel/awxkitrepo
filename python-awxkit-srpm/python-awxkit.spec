@@ -1,14 +1,14 @@
 # Force python38 for RHEL 8, which has python 3.6 by default
-%if 0%{?el8}
-%global python3_version 3.9
-%global python3_pkgversion 39
+%if 0%{?el8} || 0%{?el9}
+%global python3_version 3.11
+%global python3_pkgversion 3.11
 # For RHEL 'platform python' insanity: Simply put, no.
 %global __python3 %{_bindir}/python%{python3_version}
 %endif
 
 %global pypi_name awxkit
 %global srcname awxkit
-%global pypi_version 21.13.0
+%global pypi_version 22.2.0
 
 Name: python-%{pypi_name}
 Version: %{pypi_version}
@@ -17,7 +17,7 @@ Summary: awxkit
 License: Apache
 
 # whl files cannot use pypi_source
-Source: https://files.pythonhosted.org/packages/f5/cf/8c8ee7d9beb858eb2761576a59b681e6231af93217beb0ee88a587f645ba/awxkit-21.13.0-py3-none-any.whl
+Source: https://files.pythonhosted.org/packages/e8/d4/6d3b7f410dcf8967e88bcf0bb7c7e54a838ae584b70ab338250d52efde4d/awxkit-22.2.0-py3-none-any.whl
 
 # Scripts normally built by wheel installer
 # python version set by RPM python processing
@@ -34,6 +34,7 @@ Summary: awxkit
 # Added for setup requirements
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
+BuildRequires:  python%{python3_pkgversion}-rpm-macros
 
 # Extracted from: METADATA
 Requires: python%{python3_pkgversion}
@@ -57,11 +58,18 @@ Provides: akit = %{pypi_version}-%{release}
 %build
 %install
 install -d %{buildroot}%{_bindir}
-install %{SOURCE1} %{buildroot}%{_bindir}/awx
-install %{SOURCE2} %{buildroot}%{_bindir}/akit
 
-rm -f awx
-rm -f akit
+install %{SOURCE1} ./awx
+install %{SOURCE2} ./akit
+
+sed -i.bak 's|^#!/usr/bin/env python3.*|#!%{__python3}|g' awx
+sed -i.bak 's|^#!/usr/bin/env python3.*|#!%{__python3}|g' akit
+
+install awx %{buildroot}%{_bindir}/awx
+install akit %{buildroot}%{_bindir}/akit
+
+rm -f awx awx.bak
+rm -f akit akit.bak
 
 install -d %{buildroot}%{python3_sitelib}
 cp -r * %{buildroot}%{python3_sitelib}/
@@ -75,3 +83,5 @@ cp -r * %{buildroot}%{python3_sitelib}/
 %doc awxkit/cli/docs/source/*.rst
 
 %changelog
+* Mon May 15 2023 Nico Kadel-Garcia - 22.2.0-0.1
+- Update to 22.2.0
