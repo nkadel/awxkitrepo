@@ -7,11 +7,7 @@ REPOBASE=file://$(PWD)
 
 
 # EPEL built
-#AWXKITPKGS+=python-crypto-srpm
 AWXKITPKGS+=python-jq-srpm
-#AWXKITPKGS+=python-naked-srpm
-#AWXKITPKGS+=python-shellescape-srpm
-#
 AWXKITPKGS+=python-websockets-srpm
 
 # Requires websocket, conflicts with docker
