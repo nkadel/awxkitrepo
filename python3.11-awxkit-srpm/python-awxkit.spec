@@ -8,7 +8,7 @@
 
 %global pypi_name awxkit
 %global srcname awxkit
-%global pypi_version 23.2.0
+%global pypi_version 23.6.0
 
 Name: python-%{pypi_name}
 Version: %{pypi_version}
@@ -17,7 +17,7 @@ Summary: awxkit
 License: Apache
 
 # whl files cannot use pypi_source
-Source:https://files.pythonhosted.org/packages/58/7d/3c1520db1f462f10e0f248e694a8be07ece9f820576a45556c5e3cae8f61/awxkit-23.2.0-py3-none-any.whl
+Source: https://files.pythonhosted.org/packages/67/31/ce5934908197f6f6fe63cf678c027cc19309ed216d097e19c6042cb22507/awxkit-23.6.0-py3-none-any.whl
 
 # Scripts normally built by wheel installer
 # python version set by RPM python processing
@@ -83,5 +83,8 @@ cp -r * %{buildroot}%{python3_sitelib}/
 %doc awxkit/cli/docs/source/*.rst
 
 %changelog
+* Wed Nov 29 2023 Nico Kadel-Garcia - 25.5.0-0.1
+- Updddddateee to 23.5.0
+
 * Mon May 15 2023 Nico Kadel-Garcia - 22.2.0-0.1
 - Update to 22.2.0
