@@ -11,7 +11,7 @@
 %bcond_with tests
 
 Name:           python-setuptools_scm
-Version:        6.0.1
+Version:        6.4.2
 #Release:        1%%{?dist}
 Release:        0.1%{?dist}
 Summary:        Blessed package to manage your versions by SCM tags

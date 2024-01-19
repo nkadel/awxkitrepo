@@ -7,24 +7,41 @@ REPOBASE=file://$(PWD)
 
 
 # EPEL built
-AWXKITPKGS+=python-jq-srpm
-AWXKITPKGS+=python-websockets-srpm
+AWXKITPKGS+=python3.11-jq-srpm
+AWXKITPKGS+=python3.11-websockets-srpm
+AWXKITPKGS+=python3.11-toml-srpm
+AWXKITPKGS+=python3.11-tomli-srpm
+AWXKITPKGS+=python3.11-setuptools_scm-srpm
+
+# Requires testpath and flit-core
+AWXKITPKGS+=python3.11-flit-core-srpm
+# Requires flit-core
+AWXKITPKGS+=python3.11-tomli-w-srpm
+# Requires tomli-w and testpath and flit-core
+AWXKITPKGS+=python3.11-flit-srpm
+# Requires flit
+AWXKITPKGS+=python3.11-testath-srpm
+
+AWXKITPKGS+=python3.11-flit-scm-srpm
 
 # Requires websocket, conflicts with docker
-AWXKITPKGS+=python-websocket-client-srpm
+AWXKITPKGS+=python3.11-websocket-client-srpm
 
-AWXKITPKGS+=python-awxkit-srpm
+AWXKITPKGS+=python3.11-hatch-vcs-srpm
+AWXKITPKGS+=python3.11-hatchling-srpm
+
+AWXKITPKGS+=python3.11-awxkit-srpm
 
 REPOS+=awxkitrepo/el/8
 REPOS+=awxkitrepo/el/9
-REPOS+=awxkitrepo/fedora/38
+REPOS+=awxkitrepo/fedora/39
 REPOS+=awxkitrepo/amz/2
 
 REPODIRS := $(patsubst %,%/x86_64/repodata,$(REPOS)) $(patsubst %,%/SRPMS/repodata,$(REPOS))
 
 CFGS+=awxkitrepo-8-x86_64.cfg
 CFGS+=awxkitrepo-9-x86_64.cfg
-CFGS+=awxkitrepo-f38-x86_64.cfg
+CFGS+=awxkitrepo-f39-x86_64.cfg
 # Amazon 2 config
 #CFGS+=awxkitrepo-amz2-x86_64.cfg
 
@@ -33,7 +50,7 @@ CFGS+=centos-stream+epel-8-x86_64.cfg
 
 # Link from /etc/mock
 MOCKCFGS+=centos-stream+epel-9-x86_64.cfg
-MOCKCFGS+=fedora-38-x86_64.cfg
+MOCKCFGS+=fedora-39-x86_64.cfg
 #MOCKCFGS+=amazonlinux-2-x86_64.cfg
 
 all:: install
@@ -58,17 +75,17 @@ install clean getsrc build srpm src.rpm::
 
 # Dependencies of libraries on other libraries for compilation
 
-#python-commentjson-srpm:: python-lark-parser-srpm
-#python-entrypoints-srpm:: python-commentjson-srpm
+#python3.11-commentjson-srpm:: python3.11-lark-parser-srpm
+#python3.11-entrypoints-srpm:: python3.11-commentjson-srpm
 #
-#python-flake8-srpm:: pyflakes-srpm
+#python3.11-flake8-srpm:: pyflakes-srpm
 #
-#python-resolvelib-srpm:: python-flake8-srpm
-#python-resolvelib-srpm:: python-commentjson-srpm
+#python3.11-resolvelib-srpm:: python3.11-flake8-srpm
+#python3.11-resolvelib-srpm:: python3.11-commentjson-srpm
 #
-#awxkit-core-2.11.x-srpm:: python-resolvelib-srpm
-##awxkit-core-2.12.x-srpm:: python-resolvelib-srpm
-#awxkit-core-2.13.x-srpm:: python-resolvelib-srpm
+#awxkit-core-2.11.x-srpm:: python3.11-resolvelib-srpm
+##awxkit-core-2.12.x-srpm:: python3.11-resolvelib-srpm
+#awxkit-core-2.13.x-srpm:: python3.11-resolvelib-srpm
 #
 #awxkit-4.x-srpm:: awxkit-core-2.11.x-srpm
 ##awxkit-5.x-srpm:: awxkit-core-2.12.x-srpm
@@ -143,7 +160,7 @@ awxkitrepo-9-x86_64.cfg: centos-stream+epel-9-x86_64.cfg
 	@echo 'gpgcheck=0' | tee -a $@
 	@echo '"""' | tee -a $@
 
-awxkitrepo-f38-x86_64.cfg: /etc/mock/fedora-38-x86_64.cfg
+awxkitrepo-f39-x86_64.cfg: /etc/mock/fedora-39-x86_64.cfg
 	@echo Generating $@ from $?
 	@echo "include('$?')" | tee $@
 	@echo "config_opts['root'] = 'awxkitrepo-f{{ releasever }}-{{ target_arch }}'" | tee -a $@
@@ -151,7 +168,7 @@ awxkitrepo-f38-x86_64.cfg: /etc/mock/fedora-38-x86_64.cfg
 	@echo '[awxkitrepo]' | tee -a $@
 	@echo 'name=awxkitrepo' | tee -a $@
 	@echo 'enabled=1' | tee -a $@
-	@echo 'baseurl=$(REPOBASE)/awxkitrepo/fedora/38/x86_64/' | tee -a $@
+	@echo 'baseurl=$(REPOBASE)/awxkitrepo/fedora/39/x86_64/' | tee -a $@
 	@echo 'skip_if_unavailable=False' | tee -a $@
 	@echo 'metadata_expire=1s' | tee -a $@
 	@echo 'gpgcheck=0' | tee -a $@

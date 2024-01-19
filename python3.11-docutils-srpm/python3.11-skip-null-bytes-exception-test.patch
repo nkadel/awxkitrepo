@@ -1,0 +1,88 @@
+diff --git a/test/test_parsers/test_rst/test_directives/test_tables.py b/test/test_parsers/test_rst/test_directives/test_tables.py
+index 2e11131..cf9f097 100755
+--- a/test/test_parsers/test_rst/test_directives/test_tables.py
++++ b/test/test_parsers/test_rst/test_directives/test_tables.py
+@@ -55,17 +55,6 @@ csv_unknown_url = "'bogus.csv'"
+ if sys.version_info < (3, 0):
+     csv_unknown_url = "bogus.csv"
+ 
+-
+-def null_bytes():
+-    with open(utf_16_csv, 'rb') as f:
+-        csv_data = f.read()
+-    csv_data = unicode(csv_data, 'latin1').splitlines()
+-    reader = csv.reader([tables.CSVTable.encode_for_csv(line + '\n')
+-                         for line in csv_data])
+-    next(reader)
+-
+-null_bytes_exception = DocutilsTestSupport.exception_data(null_bytes)[0]
+-
+ totest = {}
+ 
+ totest['table'] = [
+@@ -1025,26 +1014,6 @@ u"""\
+                good, csv, data
+ """ % csv_eod_error_str],
+ ["""\
+-.. csv-table:: bad encoding
+-   :file: %s
+-   :encoding: latin-1
+-
+-(7- and 8-bit text encoded as UTF-16 has lots of null/zero bytes.)
+-""" % utf_16_csv,
+-"""\
+-<document source="test data">
+-    <system_message level="3" line="1" source="test data" type="ERROR">
+-        <paragraph>
+-            Error with CSV data in "csv-table" directive:
+-            %s
+-        <literal_block xml:space="preserve">
+-            .. csv-table:: bad encoding
+-               :file: %s
+-               :encoding: latin-1
+-    <paragraph>
+-        (7- and 8-bit text encoded as UTF-16 has lots of null/zero bytes.)
+-""" % (null_bytes_exception, utf_16_csv)],
+-["""\
+ .. csv-table:: good encoding
+    :file: %s
+    :encoding: utf-16
+@@ -1459,6 +1428,38 @@ totest['list-table'] = [
+ """],
+ ]
+ 
++if sys.version_info < (3, 11):
++    def null_bytes():
++        with open(utf_16_csv, 'rb') as f:
++            csv_data = f.read()
++        csv_data = unicode(csv_data, 'latin1').splitlines()
++        reader = csv.reader([tables.CSVTable.encode_for_csv(line + '\n')
++                             for line in csv_data])
++        next(reader)
++
++    null_bytes_exception = DocutilsTestSupport.exception_data(null_bytes)[0]
++
++    totest['table'].append(["""\
++.. csv-table:: bad encoding
++   :file: %s
++   :encoding: latin-1
++
++(7- and 8-bit text encoded as UTF-16 has lots of null/zero bytes.)
++""" % utf_16_csv,
++"""\
++<document source="test data">
++    <system_message level="3" line="1" source="test data" type="ERROR">
++        <paragraph>
++            Error with CSV data in "csv-table" directive:
++            %s
++        <literal_block xml:space="preserve">
++            .. csv-table:: bad encoding
++               :file: %s
++               :encoding: latin-1
++    <paragraph>
++        (7- and 8-bit text encoded as UTF-16 has lots of null/zero bytes.)
++""" % (null_bytes_exception, utf_16_csv)])
++
+ 
+ if __name__ == '__main__':
+     import unittest

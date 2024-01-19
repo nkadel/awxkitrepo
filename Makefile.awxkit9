@@ -4,9 +4,9 @@
 
 # Assure that sorting is case sensitive
 LANG=C
-MOCKS+=awxkitrepo-8-x86_64
+#MOCKS+=awxkitrepo-8-x86_64
 MOCKS+=awxkitrepo-9-x86_64
-MOCKS+=awxkitrepo-f39-x86_64
+#MOCKS+=awxkitrepo-f39-x86_64
 #MOCKS+=awxkitrepo-amz2-x86_64
 
 MOCKCFGS+=$(MOCKS)
