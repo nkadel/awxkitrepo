@@ -7,6 +7,7 @@ REPOBASE=file://$(PWD)
 
 
 # EPEL built
+AWXKITPKGS+=python3.11-docutils-srpm
 AWXKITPKGS+=python3.11-jq-srpm
 AWXKITPKGS+=python3.11-websockets-srpm
 AWXKITPKGS+=python3.11-toml-srpm
@@ -17,7 +18,7 @@ AWXKITPKGS+=python3.11-setuptools_scm-srpm
 AWXKITPKGS+=python3.11-flit-core-srpm
 # Requires flit-core
 AWXKITPKGS+=python3.11-tomli-w-srpm
-# Requires tomli-w and testpath and flit-core
+# Requires tomli-w and testpath and flit-core and docutils
 AWXKITPKGS+=python3.11-flit-srpm
 # Requires flit
 AWXKITPKGS+=python3.11-testath-srpm

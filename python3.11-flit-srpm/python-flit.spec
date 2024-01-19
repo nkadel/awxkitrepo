@@ -26,14 +26,14 @@ Source0:        https://github.com/pypa/flit/archive/%{version}/flit-%{version}.
 Source1:        https://pypi.org/pypi?%3Aaction=list_classifiers#/classifiers.lst
 
 BuildArch:      noarch
-BuildRequires:  python3-devel
+BuildRequires:  python%{python3_pkgversion}-devel
 
 %if %{with tests}
 BuildRequires:  /usr/bin/python
-BuildRequires:  python3-pytest
-BuildRequires:  python3-responses
-BuildRequires:  python3-testpath
-BuildRequires:  python3-requests-download
+BuildRequires:  python%{python3_pkgversion}-pytest
+BuildRequires:  python%{python3_pkgversion}-responses
+BuildRequires:  python%{python3_pkgversion}-testpath
+BuildRequires:  python%{python3_pkgversion}-requests-download
 BuildRequires:  git-core
 %endif
 
@@ -49,14 +49,14 @@ included automatically.}
 %description %_description
 
 
-%package -n python3-flit
+%package -n python%{python3_pkgversion}-flit
 Summary:        %{summary}
 
 # https://pypi.python.org/pypi/tornado
 # ./flit/log.py unknown version
 Provides:       bundled(python3dist(tornado))
 
-%description -n python3-flit %_description
+%description -n python%{python3_pkgversion}-flit %_description
 
 
 %prep
@@ -92,7 +92,7 @@ export XDG_CACHE_HOME=$PWD/fake_cache
 %endif
 
 
-%files -n python3-flit -f %{pyproject_files}
+%files -n python%{python3_pkgversion}-flit -f %{pyproject_files}
 %license LICENSE
 %doc README.rst
 %{_bindir}/flit
